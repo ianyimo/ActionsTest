@@ -27,7 +27,7 @@ jobs:
     - name: Build with Maven
       env:
         BARK: ${{ secrets.BARK }}
-        OID: ${{ secrets.OID }}
-	UCODE: ${{ secrets.UCODE }}
+        UID: ${{ secrets.UID }}
+        UCODE: ${{ secrets.UCODE }}
       run: |
-        mvn compile exec:java -Dexec.mainClass="starlight.Run" -Dexec.args="${BARK} ${OID} ${UCODE}"
+        mvn compile exec:java -Dexec.mainClass="starlight.Run" -Dexec.args="${BARK} ${UID} ${UCODE}"

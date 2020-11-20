@@ -27,17 +27,28 @@ public class Holiday {
         }
     }
 
-    public static String getDate(int amount) {
+    public static String getTime(String pattern) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(getCalendar().getTime());
+    }
+
+    public static String getDateOffset(int offset) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = getCalendar();
-        if (amount != 0) {
-            calendar.add(Calendar.DATE, amount);
+        if (offset != 0) {
+            calendar.add(Calendar.DATE, offset);
         }
         return simpleDateFormat.format(calendar.getTime());
     }
-    public static int getHour(){
+
+    public static int getHour() {
         return getCalendar().get(Calendar.HOUR_OF_DAY);
     }
+
+    public static int getMinute() {
+        return getCalendar().get(Calendar.MINUTE);
+    }
+
     public static Boolean isHoliday(String date) {
         String apiUrl = "http://tool.bitefu.net/jiari/";
         String result = HttpRequest.get(apiUrl, false, "d", date, "back", "json", "info", 1).body();

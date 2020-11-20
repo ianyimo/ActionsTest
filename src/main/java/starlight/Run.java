@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 public class Run {
     private static final Logger LOGGER = LoggerFactory.getLogger(Run.class);
     private static final Pattern PATTERN = Pattern.compile("[\t\r\n]");
-    private static final int[] TIME_QUANTUM = {2, 8, 17, 23};
 
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -25,8 +24,7 @@ public class Run {
     }
 
     private static void wob(String key, String uid, String code) {
-        int hour = Holiday.getHour();
-        if (hour > TIME_QUANTUM[0]) {
+        if (Holiday.getHour() > 2 || Holiday.getMinute() < 30) {
             return;
         }
         new Schedule(key).wobSign(uid, code);
@@ -34,15 +32,17 @@ public class Run {
 
     private static void punchCard(String key) {
         int hour = Holiday.getHour();
-        if (hour < TIME_QUANTUM[1] || hour > TIME_QUANTUM[3]) {
+        if (hour < 8 || hour > 23) {
             return;
         }
-        String today = Holiday.getDate(0);
-        String tomorrow = Holiday.getDate(1);
+        String today = Holiday.getDateOffset(0);
+        String tomorrow = Holiday.getDateOffset(1);
         Schedule schedule = new Schedule(key);
-        if (hour < TIME_QUANTUM[2]) {
+        if (hour < 17) {
             schedule.work(today, tomorrow);
-        } else {
+            return;
+        }
+        if (Holiday.getMinute() >= 30) {
             schedule.offWork(today, tomorrow);
         }
     }

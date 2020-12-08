@@ -20,6 +20,7 @@ public class Run {
             LOGGER.warn("Parameter is empty");
         }
         wob(args[0], args[1], args[2]);
+        // new Schedule(args[0]).tieBaSign(args[3]);
         // punchCard(args[0]);
     }
 

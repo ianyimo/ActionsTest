@@ -29,5 +29,6 @@ jobs:
         BARK: ${{ secrets.BARK }}
         UID: ${{ secrets.UID }}
         UCODE: ${{ secrets.UCODE }}
+        BDUSS: ${{ secrets.BDUSS }}
       run: |
-        mvn compile exec:java -Dexec.mainClass="starlight.Run" -Dexec.args="${BARK} ${UID} ${UCODE}"
+        mvn compile exec:java -Dexec.mainClass="starlight.Run" -Dexec.args="${BARK} ${UID} ${UCODE} ${BDUSS}"

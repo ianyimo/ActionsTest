@@ -20,7 +20,7 @@ public class Run {
             LOGGER.warn("Parameter is empty");
         }
         wob(args[0], args[1], args[2]);
-        punchCard(args[0]);
+        // punchCard(args[0]);
     }
 
     private static void wob(String key, String uid, String code) {
